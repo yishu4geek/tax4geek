@@ -1,0 +1,54 @@
+@(signupForm: Form[Logininfo])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+<!--      css         -->
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/signin.css")">
+
+@helper.form(action = routes.Signup.submit, 'class -> "form-signin"){
+
+<fieldset>
+    <h2 class="form-signin-heading">Please sign up</h2>
+
+    <!--<input name="email" type="text" class="form-control" placeholder="Email address" required autofocus>-->
+    <!--<input name="passwd" type="password" class="form-control" placeholder="Password" required>-->
+    <!--<label class="checkbox">-->
+    <!--<input type="checkbox" value="remember-me"> Remember me-->
+    <!--</label>-->
+    <!--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+    @inputText(
+    signupForm("email"),
+    'class->"form-control",
+    'autofocus -> "autofocus",
+    '_label -> None,
+    'placeholder ->"Email as username",
+    '_error -> signupForm.globalError
+    )
+
+    @inputPassword(
+    signupForm("passwd"),
+    'class->"form-control",
+    '_label -> None,
+    'placeholder -> "Password",
+    '_error -> signupForm.globalError
+    )
+
+    @inputPassword(
+    signupForm("repeatPassword"),
+    'class->"form-control",
+    'placeholder ->"Repeat Password",
+    '_label -> None,
+    '_help -> "Please repeat your password again.",
+    '_error -> signupForm.error("password")
+    )
+    <!--<label class="checkbox">-->
+    <!--<input type="checkbox" value="remember-me"> Remember me-->
+    <!--</label>-->
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+
+
+</fieldset>
+}
